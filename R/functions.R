@@ -130,11 +130,11 @@ ci.test <- function( x, y, z=NULL, data ) {
 		ty <- sweep( ty, 2, colMeans(ty) )
 	} else {
 		forest.x <- ranger::ranger( x=data[,z,drop=FALSE], y=data[,x],
-			probability=ncol(tx)>1 )
+			probability=ncol(tx)>1, num.trees=50 )
 		tx <- tx - predict( forest.x, data=data )$predictions
 
 		forest.y <- ranger::ranger( x=data[,z,drop=FALSE], y=data[,y],
-			probability=ncol(ty)>1 )
+			probability=ncol(ty)>1, num.trees=50 )
 		ty <- ty - predict( forest.y, data=data )$predictions
 	}
 
